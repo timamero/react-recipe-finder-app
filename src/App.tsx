@@ -1,13 +1,14 @@
 import React from 'react';
-import Register from './pages/register';
-import LogIn from './pages/login'
-import './firebasedb'
+import Home from './pages/Home'
+import Register from './pages/Register';
+import LogIn from './pages/LogIn';
+import './firebasedb';
 
 
 function App() {
   return (
     <div className="App">
-      <h1>Cravings</h1>
+      <Home />
       <LogIn />
       <Register />
     </div>
