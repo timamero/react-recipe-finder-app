@@ -1,9 +1,10 @@
 import React from 'react';
+import Typeography from '@mui/material/Typography'
 
 function App() {
   return (
     <div className="App">
-      <h1>Cravings</h1>
+      <Typeography variant="h1">Cravings</Typeography>
     </div>
   );
 }
