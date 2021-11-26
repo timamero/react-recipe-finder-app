@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Recipe Finder Application
+*This project is in development*
+
+Recipe finder is an application that allows a user to search for recipes by cuisine or ingredients. The user can view a list of results or can let the app randomly select a recipe. The user can skip/swipe through random recipes. Users with an account will be able to save recipes.
+
+Recipe data will be fetched from the [Spoonacular API](https://spoonacular.com/food-api).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
