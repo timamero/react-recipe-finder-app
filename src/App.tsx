@@ -1,8 +1,8 @@
 import React from 'react';
 import Typeography from '@mui/material/Typography'
 import Home from './pages/Home'
-import Register from './pages/register';
-import LogIn from './pages/login';
+import LogIn from './pages/LogIn';
+import Register from './pages/Register'
 import './firebasedb';
 
 

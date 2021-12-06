@@ -31,7 +31,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm test:emulators`
 Run this command before running `npm test`!  
-Launches the Firebase Local Emulator Suite
+Launches the Firebase Local Emulator Suite \
 See section about the [Emulator Suite](https://firebase.google.com/docs/emulator-suite) for more information.
 ### `npm test`
 
