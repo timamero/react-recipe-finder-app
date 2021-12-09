@@ -2,39 +2,45 @@
  * Navigation Menu
  * 
 */ 
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import { Container, Typography, AppBar, Toolbar, IconButton, Button } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import { grey } from '@mui/material/colors';
+import { Container, Typography, AppBar, Toolbar, Button } from "@mui/material";
+import { AuthContext } from '../App';
+import { auth } from '../firebasedb';
+
 
 export default function NavBar() {
+  const user = useContext(AuthContext);
+
+  const handleLogout = () => {
+    auth.signOut()
+    window.location.reload()
+  }
+
   return (
     <Container max-width="sm">
       <AppBar position="static">
-        <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-          
+        <Toolbar>     
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/">
             Cravings Recipe Finder
             </Link>
           </Typography>
-          
-          <Button color="inherit">
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button color="inherit">
-            <Link to="/register">Register</Link>
-          </Button>
+          {user
+            ?
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+            :
+            <div>
+              <Button color="inherit">
+                <Link to="/login">Login</Link>
+              </Button>
+              <Button color="inherit">
+                <Link to="/register">Register</Link>
+              </Button>
+            </div>
+          }
         </Toolbar>
       </AppBar>
     </Container>
