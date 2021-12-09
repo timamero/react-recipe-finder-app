@@ -1,5 +1,5 @@
 /*
- * User registration form
+ * User registration form Page
  * 
  * Resources:
  * https://github.com/firebase/firebaseui-web
@@ -8,9 +8,8 @@
 */ 
 import React, { useState } from 'react'
 import { Container, Typography, Input, InputLabel, Button } from "@mui/material";
-import { getAuth, createUserWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
-
-
+import { createUserWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
+import { auth } from '../firebasedb';
 
 export default function Register() {
   const [email, setEmail] = useState('')
@@ -19,8 +18,6 @@ export default function Register() {
     e.preventDefault();
 
     // Firebase authentication - create new user and sign in
-    const auth = getAuth();
-
     if (process.env.NODE_ENV === 'test') {
       // During testing, connect to the Authentication Emulator
       connectAuthEmulator(auth, "http://localhost:9099");
@@ -33,10 +30,13 @@ export default function Register() {
         console.log('user', user)
       })
       .catch((error) => {
+        console.log('error in creating account')
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('error code: ', errorCode);
-        console.log('error message: ', errorMessage)
+        if (process.env.NODE_ENV !== 'test') {
+          console.log('error code: ', errorCode);
+          console.log('error message: ', errorMessage)
+        }  
     });
     
     // clear inputs
@@ -46,7 +46,7 @@ export default function Register() {
 
   return (
     <Container max-width="sm">
-      <Typography variant="h2">Create an account</Typography>
+      <Typography variant="h2">Create a New Account</Typography>
       <form onSubmit={handleRegisterSubmit}>
         <InputLabel htmlFor="email">Email</InputLabel>
         <Input 
@@ -64,7 +64,7 @@ export default function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required={true}/>
-        <Button type="submit" variant="contained">Register</Button>
+        <Button type="submit" variant="contained">Create Account</Button>
       </form>
     </Container>
   )
