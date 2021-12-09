@@ -7,7 +7,8 @@
 */ 
 import React, { useState } from 'react';
 import { Container, Typography, Input, Button } from "@mui/material";
-import { getAuth, signInWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
+import { signInWithEmailAndPassword, connectAuthEmulator, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { auth } from '../firebasedb';
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -16,8 +17,7 @@ export default function Login() {
     e.preventDefault();
 
     // Firebase authentication - sign in user
-    const auth = getAuth();
-
+    setPersistence(auth, browserLocalPersistence)
     if (process.env.NODE_ENV === 'test') {
       // During testing, connect to the Authentication Emulator
       connectAuthEmulator(auth, "http://localhost:9099");
