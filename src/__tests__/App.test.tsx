@@ -13,7 +13,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { auth } from '../firebasedb';
+import { auth } from '../firebase';
 import { deleteUser } from 'firebase/auth';
 import App from '../App';
 

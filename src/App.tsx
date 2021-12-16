@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import AppHome from './pages/AppHome';
 import LogIn from './pages/LogIn';
 import Register from './pages/Register'
-import { auth } from './firebasedb';
+import { auth } from './firebase';
 import NavBar from './components/NavBar';
 import { onAuthStateChanged, setPersistence, browserLocalPersistence } from 'firebase/auth';
 

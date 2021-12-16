@@ -10,7 +10,7 @@
 import React, { useState } from 'react'
 import { Container, Typography, Input, InputLabel, Button } from "@mui/material";
 import { createUserWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { auth } from '../firebasedb';
+import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {

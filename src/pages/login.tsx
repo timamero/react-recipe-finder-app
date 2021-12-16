@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, Input, Button } from "@mui/material";
 import { signInWithEmailAndPassword, connectAuthEmulator, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { auth } from '../firebasedb';
+import { auth } from '../firebase';
 
 export default function Login() {
   const [email, setEmail] = useState('')

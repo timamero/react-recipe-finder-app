@@ -6,7 +6,7 @@ import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { Container, Typography, AppBar, Toolbar, Button } from "@mui/material";
 import { AuthContext } from '../App';
-import { auth } from '../firebasedb';
+import { auth } from '../firebase';
 
 
 export default function NavBar() {
