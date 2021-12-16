@@ -8,20 +8,17 @@
 */ 
 import React, { useState } from 'react'
 import { Container, Typography, Input, InputLabel, Button } from "@mui/material";
-import { createUserWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebasedb';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
   const handleRegisterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Firebase authentication - create new user and sign in
-    if (process.env.NODE_ENV === 'test') {
-      // During testing, connect to the Authentication Emulator
-      connectAuthEmulator(auth, "http://localhost:9099");
-    }
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -38,10 +35,11 @@ export default function Register() {
           console.log('error message: ', errorMessage)
         }  
     });
-    
-    // clear inputs
+
     setEmail('')
     setPassword('')
+
+    navigate('/app')
   }
 
   return (
