@@ -6,7 +6,7 @@
 */ 
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
-import { getAuth } from "firebase/auth";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyALf1bTmTrsnpBF7On54vJAQEG22YRpzlk",
@@ -22,5 +22,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export const auth = getAuth();
+
+if (process.env.NODE_ENV === 'test') {
+  // During testing, connect to the Authentication Emulator
+  connectAuthEmulator(auth, "http://localhost:9099");
+}
 
 export default db;
