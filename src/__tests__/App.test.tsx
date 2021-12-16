@@ -9,30 +9,55 @@
 */
 
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
+import { auth } from '../firebasedb';
+import { deleteUser } from 'firebase/auth';
 import App from '../App';
+
+beforeEach(() => {
+  const user = auth.currentUser;
+  if (user) {
+    deleteUser(user)
+  }
+})
 
 describe('App component tests', () => {
   test('Title is rendered', () => {
-    render(<App />)
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>)
 
     expect(screen.getByText('Cravings Recipe Finder')).toBeInTheDocument()
   });
 
-  test.skip('User is redirected to the home page after creating an account', () => {
-    // before each test, need to delete all users in auth emulator
-    render(<App />)
+  test('User is redirected to the home page after creating an account', async () => {
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>)
+      
+    // Initially, no user is signed in  
+    expect(screen.getByText('Create an account to get started!')).toBeInTheDocument()
+
+    // Navigate to the register page
+    const registerNavLink = screen.getByText('Register')
+    userEvent.click(registerNavLink)
+    
+    // User types email and password into email and password fields
     const emailInput = screen.getByLabelText('Email')
     const passwordInput = screen.getByPlaceholderText('password')
-
     userEvent.type(emailInput, 'jest@example.com')
     userEvent.type(passwordInput, 'testpassword')
 
-    // screen.debug(emailInput)
-    userEvent.click(screen.getByText('Register'))
-    
-    //expect(screen.getByText('Home')).toBeInTheDocument()
+    // User submits register form
+    const createAccountBtn = screen.getByText('Create Account')
+    userEvent.click(createAccountBtn)
+  
+    const welcomeText = screen.getByText('Search for a recipe!')
+    expect(welcomeText).toBeInTheDocument()
   })
 })
