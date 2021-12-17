@@ -5,7 +5,7 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { Container, Typography, AppBar, Toolbar, Button } from "@mui/material";
-import { AuthContext } from '../App';
+import { AuthContext } from '../context/auth';
 import { auth } from '../firebase';
 
 
