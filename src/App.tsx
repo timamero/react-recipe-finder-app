@@ -4,7 +4,7 @@
  * Resources:
  * https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/installation#basic-installation
 */
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import AppHome from './pages/AppHome';
@@ -12,18 +12,17 @@ import LogIn from './pages/LogIn';
 import Register from './pages/Register'
 import { auth } from './firebase';
 import NavBar from './components/NavBar';
+import { User, AuthContext } from './context/auth';
 import { onAuthStateChanged, setPersistence, browserLocalPersistence } from 'firebase/auth';
 
-export const AuthContext = createContext<string | null>('')
-
 export default function App() {
-  const [currentUser, setCurrentUser] = useState<string | null>('');
+  const [currentUser, setCurrentUser] = useState(User);
 
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence)
     .then(() => onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser(user.email)
+        setCurrentUser(user)
       } else {
         console.log('user is not logged in')
       }
